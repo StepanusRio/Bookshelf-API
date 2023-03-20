@@ -57,14 +57,18 @@ const createBookHandler = (request, h) => {
   return response;
 };
 
-const getAllBooksHandler = () => (
-  {
+const getAllBooksHandler = (request, h) => {
+  const filteredBook = books.map(({ id, name, publisher }) => ({ id, name, publisher }));
+  const response = h.response({
     status: 'success',
+    message: 'Buku berhasil ditampilkan',
     data: {
-      books,
+      books: filteredBook,
     },
-  }
-);
+  });
+  response.code(200);
+  return response;
+};
 
 module.exports = {
   getAllBooksHandler,
