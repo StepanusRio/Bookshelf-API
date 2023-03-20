@@ -13,8 +13,11 @@ const createBookHandler = (request, h) => {
     reading,
   } = request.payload;
   const id = nanoid(16);
+  const insertedAt = new Date().toISOString();
+  const updatedAt = insertedAt;
   const finished = pageCount === readPage;
   const newBooks = {
+    id,
     name,
     year,
     author,
@@ -22,9 +25,10 @@ const createBookHandler = (request, h) => {
     publisher,
     pageCount,
     readPage,
-    reading,
-    id,
     finished,
+    reading,
+    insertedAt,
+    updatedAt,
   };
   if (!name) {
     const response = h.response({
